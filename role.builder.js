@@ -17,7 +17,7 @@ module.exports = {
                 }
             }
             else {
-                buildClosest.run(creep.room, STRUCTURE_EXTENSION, creep.pos);
+                upgrader.run(creep)
             }
         }
         else {
