@@ -9,7 +9,10 @@ module.exports = {
             creep.memory.working = true;
         }
         if (creep.memory.working == true) {
-            roadBuilder.run(creep.pos, creep.room.controller.pos, creep.room)
+            if(creep.room.memory.controllerHasRoad == undefined) {
+                roadBuilder.run(creep.pos, creep.room.controller.pos, creep.room)
+                creep.room.memory.controllerHasRoad = true
+            }
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
             }
