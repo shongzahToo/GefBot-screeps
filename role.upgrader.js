@@ -1,3 +1,5 @@
+var roadBuilder = require('backend.buildRoad')
+
 module.exports = {
     run: function(creep) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
@@ -7,6 +9,7 @@ module.exports = {
             creep.memory.working = true;
         }
         if (creep.memory.working == true) {
+            roadBuilder.run(creep.pos, creep.room.controller.pos, creep.room)
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
             }

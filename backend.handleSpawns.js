@@ -49,11 +49,9 @@ module.exports = {
             for(const i in droppedEnergy) {
                 totalDropped += droppedEnergy[i].amount
             }
-            console.log(totalDropped)
             if(totalDropped > 50 && _.sum(Game.creeps, (c) => c.memory.role == 'hauler') >= needs.haulers && needs.haulers < needs.staticHarvesters) {
                 spawn.memory.needs.haulers = spawn.memory.needs.haulers + 1
             }
-            
         }
     }
 };
