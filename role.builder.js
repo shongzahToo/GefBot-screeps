@@ -1,5 +1,5 @@
 var upgrader = require('role.upgrader')
-var buildClosest = require('backend.buildClosest.js')
+var buildClosest = require('backend.buildClosest')
 
 module.exports = {
     run: function(creep) {

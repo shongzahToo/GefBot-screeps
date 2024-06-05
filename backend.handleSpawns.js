@@ -1,5 +1,5 @@
 var satisfactionCalculator = require('backend.sources.calculateSatisfaction')
-var buildClosest = require('backend.buildClosest.js')
+var buildClosest = require('backend.buildClosest')
 
 module.exports = {
     run: function(spawn) {
