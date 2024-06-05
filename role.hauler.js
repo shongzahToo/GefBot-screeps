@@ -25,11 +25,14 @@ module.exports = {
             const spawns = creep.room.find(FIND_MY_SPAWNS)
             const closestSpawn = creep.pos.findClosestByRange(spawns)
             var err = creep.transfer(closestSpawn, RESOURCE_ENERGY)
-            if (err == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestSpawn);
-            } else if (err == ERR_FULL) {
+            if (closestSpawn.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
                 creep.drop(RESOURCE_ENERGY)
+            } else if (err == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestSpawn);
             } 
+            // else if (err == ERR_FULL) {
+            //     creep.drop(RESOURCE_ENERGY)
+            // } 
         }
     }
 };
