@@ -8,7 +8,7 @@ module.exports = {
         else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
-        if (creep.memory.working == true) {
+        if (creep.memory.working == true && creep.room.find(FIND_MY_CREEPS).length > 15) {
             if(creep.room.memory.controllerHasRoad == undefined) {
                 roadBuilder.run(creep.pos, creep.room.controller.pos, creep.room)
                 creep.room.memory.controllerHasRoad = true
