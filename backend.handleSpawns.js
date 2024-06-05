@@ -1,4 +1,5 @@
 var satisfactionCalculator = require('backend.sources.calculateSatisfaction')
+var buildClosest = require('backend.buildClosest.js')
 
 module.exports = {
     run: function(spawn) {
@@ -49,8 +50,15 @@ module.exports = {
             for(const i in droppedEnergy) {
                 totalDropped += droppedEnergy[i].amount
             }
-            if(totalDropped > 50 && _.sum(Game.creeps, (c) => c.memory.role == 'hauler') >= needs.haulers && needs.haulers < needs.staticHarvesters) {
-                spawn.memory.needs.haulers = spawn.memory.needs.haulers + 1
+            if(totalDropped > 50 && _.sum(Game.creeps, (c) => c.memory.role == 'hauler') >= needs.haulers) {
+                if (needs.haulers < needs.staticHarvesters) {
+                    spawn.memory.needs.haulers = spawn.memory.needs.haulers + 1
+                } else {
+                    spawn.createCreep([WORK, WORK, CARRY, MOVE], 'harvester' + Game.time, {role: 'harvester', working: false})
+                }
+            }
+            if(totalDropped > 1000 && spawn.room.find(FIND_MY_CONSTRUCTION_SITES).filter((site) => site.type = STRUCTURE_CONTAINER) == 0) {
+                buildClosest.run(spawn.roomName, STRUCTURE_CONTAINER, spawn.pos)
             }
         }
     }
