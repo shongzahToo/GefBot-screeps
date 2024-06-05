@@ -14,14 +14,14 @@ module.exports = {
             }
         }
         needs = spawn.memory.needs
-        if(_.sum(Game.creeps, (c) => c.memory.role == 'staticHarvester') < needs.staticHarvesters) {
+        if(_.sum(Game.creeps, (c) => c.memory.role == 'hauler') < needs.haulers) {
+            spawn.createCreep([CARRY, MOVE, CARRY, MOVE], 'hauler' + Game.time, {role: 'hauler', working: false})
+        } else if(_.sum(Game.creeps, (c) => c.memory.role == 'staticHarvester') < needs.staticHarvesters) {
             spawn.createCreep([WORK, WORK, MOVE], 'staticHarvester' + Game.time, {role: 'staticHarvester', working: false})
         } else if(_.sum(Game.creeps, (c) => c.memory.role == 'harvester') < needs.harvesters && !spawn.memory.staticSpawning) {
             spawn.createCreep([WORK, WORK, CARRY, MOVE], 'harvester' + Game.time, {role: 'harvester', working: false})
         } else if(_.sum(Game.creeps, (c) => c.memory.role == 'builder') < needs.builders) {
             spawn.createCreep([WORK, WORK, CARRY, MOVE], 'builder' + Game.time, {role: 'builder', working: false})
-        } else if(_.sum(Game.creeps, (c) => c.memory.role == 'hauler') < needs.haulers) {
-            spawn.createCreep([CARRY, MOVE, CARRY, MOVE], 'hauler' + Game.time, {role: 'hauler', working: false})
         } else if(_.sum(Game.creeps, (c) => c.memory.role == 'repairer') < needs.repairers) {
             spawn.createCreep([WORK, WORK, CARRY, MOVE], 'repairer' + Game.time, {role: 'repairer', working: false})
         } else if(_.sum(Game.creeps, (c) => c.memory.role == 'upgrader') < needs.upgraders) {
